@@ -5,18 +5,15 @@ from appium.options.common import AppiumOptions
 cap: Dict[str, Any] = {
     "platformName": "Android",
     "automationName": "UIAutomator2",
-    "platformVersion": "13",
-    "deviceName": "emulator-5554",
-    "appPackage": "com.android.settings",
-    "appActivity": ".Settings",
-    "language": "en",
-    "locale": "US"
+    "platformVersion": "14",
+    "deviceName": "emulator-5554"
 }
 
-url = 'http://192.168.1.9:4723'
+url = 'http://127.0.0.1:4723'
 
 driver = webdriver.Remote(url, options=AppiumOptions().load_capabilities(cap))
 
-el = driver.find_element("xpath", "//*[@text='Battery']")
+el = driver.find_element("accessibility id", "Chrome")
 el.click()
+input = driver.find_element("xpath", "//*[@text='Search or type web address']").send_keys('python')
 driver.quit()
