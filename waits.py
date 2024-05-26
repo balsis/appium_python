@@ -3,6 +3,9 @@ import time
 from appium import webdriver
 from typing import Any, Dict
 from appium.options.common import AppiumOptions
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -16,8 +19,11 @@ cap: Dict[str, Any] = {
 url = 'http://127.0.0.1:4723'
 
 driver = webdriver.Remote(url, options=AppiumOptions().load_capabilities(cap))
-driver.implicitly_wait(50)
+# driver.implicitly_wait(50)
 
+wait = WebDriverWait(driver, 10, poll_frequency=1, ignored_exceptions=[ElementNotVisibleException, NoSuchElementException])
+el = wait.until(EC.presence_of_element_located(("xpath", "//android.widget.Button[@text='Skip']")))
+el.click()
 driver.find_element("accessibility id", "Create contact").click()
 driver.find_element("xpath", "//android.widget.EditText[@text='First name']").send_keys('Test User')
 driver.find_element("xpath", "//android.widget.EditText[@text='Phone']").send_keys('+79111234567')
