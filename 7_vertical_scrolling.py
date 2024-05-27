@@ -38,12 +38,19 @@ el1.click()
 
 el2 = wait.until(EC.presence_of_element_located(("xpath", "//android.widget.TextView[@text='Activity']")))
 el2.click()
+
+
+
 # uiautomator scroll to end
 el3 = driver.find_element('-android uiautomator', 'new UiScrollable(new UiSelector().scrollable('
                                                   'true)).setAsVerticalList().scrollToEnd(5, 3)')
+
+# uiautomator scroll to start
+
 el4 = driver.find_element('-android uiautomator', 'new UiScrollable(new UiSelector().scrollable('
                                                   'true)).setAsVerticalList().scrollToBeginning(5, 3)')
 ## ActionsChains scroll
+
 # device_size = driver.get_window_size()
 # print(device_size)
 # screen_width = device_size['width']
